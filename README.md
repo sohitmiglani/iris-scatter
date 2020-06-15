@@ -13,6 +13,10 @@ docker build -t iris-scatter .
 docker run -it -p 8080:8080 iris-scatter
 ```
 
+## Walkthrough
+
+A walkthrough video of the application can be found [here.](https://youtu.be/UjDR65XlB10)
+
 ## Details
 
 1. The application has been packaged inside Docker with a Microconda environment for an easier and streamlined installation of all the required R packages. Conda also allows for an easier documentation of the dependencies inside a separate file and keeps the Dockerfile separate.
