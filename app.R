@@ -3,38 +3,40 @@
 library(shiny)
 library(dplyr)
 
-# Defining a fluid page for the frontend of the application
+# Defining the UI as a Fluid Page that can be easily managed for multiple elements.
+# The use of SidePanel has been avoided for simplicity.
 
 ui <- fluidPage(
-    # Application title using HTML in the center
+    # Application title
     titlePanel( title = h1("A dynamic Scatterplot of the Iris Dataset", align = "center"),
                 windowTitle = "Iris Scatterplot"
                 ),
-    hr(),
+    hr(), # Divider
     mainPanel(plotOutput('plot')),
     br(),
     br(),
     br(),
-    br(), # Adding line breaks to align the side panel easily
-
-    fluidRow( # Adding specific input choices
+    br(), # A few line breaks to align the dashboard properly
+          # A column of three main input choices to edit the visualisation
+    fluidRow(
     column(3, selectInput('xCol', 'Choose the X-axis', names(iris)[-5])),
     column(3, selectInput('yCol', 'Choose the Y-axis', names(iris)[-5])),
     column(3, selectInput('species', 'Species', unique(iris$Species))),
-    column(3, uiOutput("link")) # information links
+    column(3, uiOutput("link"))
     )
 
 )
 
 server <- function(input, output, session) {
-    # Pulling the iris dataset and filtering it with the input species
+
+    # Getting the iris data and filtering it for the given species and columns
     df <- reactive({filter(iris, Species == input$species)[, c(input$xCol, input$yCol)]})
 
-    # Building the entire scatter plot
+    # Creating the main scatter plot
     output$plot <- renderPlot({plot(df(), pch = 20, cex = 3, col = "blue",
                                     main = paste("A Scatterplot of the iris dataset for the species:", input$species))})
 
-    # Some UI links for more information for the user
+    # Additional URLs for information to the user
     url1 <- a("Setosa", href="https://en.wikipedia.org/wiki/Iris_setosa")
     url2 <- a("Versicolor", href="https://en.wikipedia.org/wiki/Iris_versicolor")
     url3 <- a("Virginica", href="https://en.wikipedia.org/wiki/Iris_virginica")

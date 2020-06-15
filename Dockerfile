@@ -4,10 +4,6 @@ RUN apt-get update -y; apt-get upgrade -y; \
     apt-get install -y vim-tiny vim-athena ssh \
     build-essential gcc gfortran g++
 
-# Always save your environments in a conda env file.
-# This makes it so much easier to fix your environment when you inadvertantly clobber it
-# COPY (Relative to project) (/root)
-
 COPY environment.yml environment.yml
 RUN conda env create -f environment.yml
 RUN echo "alias l='ls -lah'" >> ~/.bashrc
