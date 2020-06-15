@@ -6,7 +6,7 @@ This is a dynamic application that allows you to visualise the iris dataset and 
 To run the application, follow the following commands:
 
 ```terminal
-git clone
+git clone https://github.com/sohitmiglani/iris-scatter
 chmod 777 app.R
 docker build -t iris-scatter .
 docker run -it -p 8080:8080 iris-scatter
