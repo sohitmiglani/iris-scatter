@@ -7,6 +7,7 @@ To run the application, follow the following commands:
 
 ```terminal
 git clone https://github.com/sohitmiglani/iris-scatter
+cd iris-scatter
 chmod 777 app.R
 docker build -t iris-scatter .
 docker run -it -p 8080:8080 iris-scatter
